@@ -2,20 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>MARILUZ TE AMO #19</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARILUZ TE AMO M2</title>
   <style>
     body {
       margin: 0;
-      background: linear-gradient(#000, #300030);
-      color: #fff;
+      background: linear-gradient(#000000, #360036);
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       overflow: hidden;
+      color: #fff;
     }
 
     h1 {
-      margin-top: 100px;
-      font-size: 40px;
+      margin-top: 80px;
+      font-size: 48px;
       color: #ff69b4;
     }
 
@@ -31,14 +32,16 @@
 
     .teamo {
       position: absolute;
-      font-size: 20px;
-      color: pink;
-      animation: subir 1.5s ease-out forwards;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff99cc;
+      animation: dispersar 2s ease-out forwards;
+      pointer-events: none;
     }
 
-    @keyframes subir {
-      0% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-100px); }
+    @keyframes dispersar {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1.5); }
     }
 
     audio {
@@ -50,24 +53,39 @@
   <h1>MARILUZ TE AMO M2</h1>
   <div class="corazon">❤️</div>
 
-  <!-- AUDIO -->
-  <audio autoplay loop id="music">
-    <source src="wave to earth - love. (Official Lyric Video).mp3" type="audio/mpeg">
+  <!-- Música -->
+  <audio id="musica" autoplay loop>
+    <source src="https://files.catbox.moe/918dmr.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
   <script>
-    document.addEventListener('click', function(e) {
-      const texto = document.createElement('div');
-      texto.className = 'teamo';
-      texto.innerText = 'TE AMO 💖';
-      texto.style.left = `${e.clientX}px`;
-      texto.style.top = `${e.clientY}px`;
-      document.body.appendChild(texto);
-      setTimeout(() => texto.remove(), 1500);
+    // Reproducir música en móvil con toque
+    document.body.addEventListener('click', () => {
+      const audio = document.getElementById('musica');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+
+      // Generar varios "TE AMO" por clic
+      for (let i = 0; i < 6; i++) {
+        const love = document.createElement('div');
+        love.className = 'teamo';
+        love.innerText = 'TE AMO 💖';
+
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        love.style.left = `${x}px`;
+        love.style.top = `${y}px`;
+        love.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`);
+        love.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`);
+
+        document.body.appendChild(love);
+        setTimeout(() => love.remove(), 2000);
+      }
     });
   </script>
 </body>
 </html>
-
 
