@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MARILUZ TE AMO M2</title>
   <style>
     body {
@@ -10,28 +10,30 @@
       background: radial-gradient(#000000, #2b002b);
       overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
+      touch-action: manipulation;
     }
 
     h1 {
       display: none;
     }
 
-    /* SOLO EN CELULAR - TE AMO CENTRAL */
+    /* SOLO EN CELULAR: TEXTO CENTRAL "TE AMO 💖" */
     @media (max-width: 768px) {
       h1 {
         display: block;
         position: fixed;
-        top: 40%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 48px;
+        font-size: 64px;
         color: #ff80df;
-        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff33ff;
+        text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff33ff;
         z-index: 1000;
+        text-align: center;
       }
     }
 
-    /* TE QUIERO LLUVIA */
+    /* LLUVIA "TE QUIERO 💘" */
     .tequiero {
       position: absolute;
       top: -50px;
@@ -47,20 +49,20 @@
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* TOQUE - TE AMO BRILLANTE */
+    /* EXPLOSIÓN "TE AMO 💖" AL TOCAR */
     .teamo {
       position: absolute;
-      font-size: 32px;
+      font-size: 48px;
       font-weight: bold;
       color: #ff66cc;
-      text-shadow: 0 0 10px #fff, 0 0 20px #ff33ff;
+      text-shadow: 0 0 20px #fff, 0 0 40px #ff33ff;
       animation: dispersar 2s ease-out forwards;
       pointer-events: none;
     }
 
     @keyframes dispersar {
       0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(2); }
+      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(2.5); }
     }
 
     audio {
@@ -71,46 +73,44 @@
 <body>
   <h1>TE AMO 💖</h1>
 
-  <!-- MÚSICA -->
+  <!-- AUDIO -->
   <audio id="musica" autoplay loop>
     <source src="https://n.uguu.se/ddlDKZhU.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
   <script>
-    // Reproducir música con primer toque
     const audio = document.getElementById('musica');
-    document.body.addEventListener('click', () => {
-      if (audio.paused) audio.play().catch(()=>{});
 
-      // Crear varios "TE AMO 💖" brillantes
-      for (let i = 0; i < 10; i++) {
+    document.body.addEventListener('click', () => {
+      if (audio.paused) audio.play().catch(() => {});
+
+      // EXPLOSIÓN de "TE AMO 💖"
+      for (let i = 0; i < 15; i++) {
         const love = document.createElement('div');
         love.className = 'teamo';
         love.innerText = 'TE AMO 💖';
         love.style.left = `${Math.random() * window.innerWidth}px`;
         love.style.top = `${Math.random() * window.innerHeight}px`;
-        love.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`);
-        love.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`);
+        love.style.setProperty('--x', `${(Math.random() - 0.5) * 500}px`);
+        love.style.setProperty('--y', `${(Math.random() - 0.5) * 500}px`);
         document.body.appendChild(love);
         setTimeout(() => love.remove(), 2000);
       }
     });
 
-    // Lluvia infinita de "TE QUIERO 💘"
+    // LLUVIA de "TE QUIERO 💘"
     function lluviaTeQuiero() {
       const t = document.createElement('div');
       t.className = 'tequiero';
       t.innerText = 'TE QUIERO 💘';
       t.style.left = `${Math.random() * window.innerWidth}px`;
-      t.style.fontSize = `${16 + Math.random() * 20}px`;
+      t.style.fontSize = `${16 + Math.random() * 24}px`;
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 6000);
     }
 
-    setInterval(lluviaTeQuiero, 300); // Cada 300ms cae uno nuevo
+    setInterval(lluviaTeQuiero, 250);
   </script>
 </body>
 </html>
-
-    
